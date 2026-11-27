@@ -1,8 +1,11 @@
-FROM node:18-bullseye-slim
+# অফিসিয়াল Java 17 (Ubuntu ভিত্তিক) ইমেজ, যাতে javac এবং java আগে থেকেই থাকে
+FROM eclipse-temurin:17-jdk
 
-# সার্ভারে OpenJDK 17 (javac এবং java) ইনস্টল করা
+# Node.js ইনস্টল করা
 RUN apt-get update && \
-    apt-get install -y openjdk-17-jdk && \
+    apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_20.x | bash - && \
+    apt-get install -y nodejs && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
 
